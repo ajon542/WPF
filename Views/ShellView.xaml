@@ -51,6 +51,8 @@
                     </i:Interaction.Triggers>
                 </Button>
             </StackPanel>
+            <RepeatButton Name="IncrementCount" Content="Up" Margin="15,60,15,0" VerticalAlignment="Top" />
+            <TextBlock Name="Count" Margin="20" FontSize="150" VerticalAlignment="Center" HorizontalAlignment="Center" />
         </Grid>
     </Grid>
 </Controls:MetroWindow>

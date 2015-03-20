@@ -4,15 +4,50 @@ using System.IO;
 using System.Security.Principal;
 using System.Windows.Forms;
 using Microsoft.Win32;
+using WpfApplication1.ViewModels;
 
 namespace WpfApplication1
 {
     using Caliburn.Micro;
     using System.Windows;
 
-    public class ShellViewModel : PropertyChangedBase
+    // Caliburn Micro expects a particular naming convention.
+    // The class name should end with ViewModel.
+    // Derive from PropertyChangedBase, looks like "Conductor<ScriptEditorViewModel>.Collection.OneActive"
+    // already does.
+    public class ShellViewModel : Conductor<ScriptEditorViewModel>.Collection.OneActive
     {
-        string name;
+        public ShellViewModel()
+        {
+            DisplayName = "SCRIPTPAD";
+        }
+
+        private int count = 50;
+        private string name;
+
+        public int Count
+        {
+            get { return count; }
+            set
+            {
+                count = value;
+                // Notify the property Count has changed.
+                NotifyOfPropertyChange(() => Count);
+                // Check whether to enable or disable the button.
+                NotifyOfPropertyChange(() => CanIncrementCount);
+            }
+        }
+
+        // Caliburn Micro automatically looks for a method or property called
+        // Can* to determine if we can actually do something.
+        public bool CanIncrementCount
+        {
+            get { return Count < 60; }
+        }
+        public void IncrementCount()
+        {
+            ++Count;
+        }
 
         public string FirstName
         {
