@@ -51,7 +51,32 @@
                     </i:Interaction.Triggers>
                 </Button>
             </StackPanel>
-            <RepeatButton Name="IncrementCount" Content="Up" Margin="15,60,15,0" VerticalAlignment="Top" />
+            <!--Caliburn Micro Short Syntax TODO: This doesn't seem to work-->
+            <!--<RepeatButton Name="IncrementCount" Content="+1" Margin="15,90,15,0" VerticalAlignment="Top" 
+                          cal:Message.Attach="[Event Click] = [Action IncrementCount(100)]"/>-->
+            <!--Caliburn Micro Long Syntax-->
+            <RepeatButton Content="+1" Margin="15,60,15,0" VerticalAlignment="Top">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <!--Call method with no parameters-->
+                        <!--<cal:ActionMessage MethodName="IncrementCount" />-->
+                        <!--Call method with parameters-->
+                        <cal:ActionMessage MethodName="IncrementCount">
+                            <cal:Parameter Value="1" />
+                        </cal:ActionMessage>
+                    </i:EventTrigger>
+                    <!--Add any types of event trigger here :)-->
+                    <i:EventTrigger EventName="MouseEnter">
+                        <cal:ActionMessage MethodName="MouseEnter" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </RepeatButton>
+
+            <UniformGrid Columns="2" VerticalAlignment="Bottom">
+                <Slider Name="Delta" Minimum="0" Maximum="5" Margin="15" />
+                <Button Name="IncrementCount" Content="Increment" Margin="15" />
+            </UniformGrid>
+
             <TextBlock Name="Count" Margin="20" FontSize="150" VerticalAlignment="Center" HorizontalAlignment="Center" />
         </Grid>
     </Grid>

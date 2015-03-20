@@ -38,15 +38,20 @@ namespace WpfApplication1
             }
         }
 
+        // Example mouse enter for the "Up" button
+        public void MouseEnter()
+        {
+        }
+
         // Caliburn Micro automatically looks for a method or property called
         // Can* to determine if we can actually do something.
         public bool CanIncrementCount
         {
-            get { return Count < 60; }
+            get { return Count < 200; }
         }
-        public void IncrementCount()
+        public void IncrementCount(int delta)
         {
-            ++Count;
+            Count += delta;
         }
 
         public string FirstName
